@@ -13,10 +13,11 @@ def treat(params):
 		metric = metric[:-1]
 	metric+="}"
 
-	smooth = params['params.metric.smooth'].split(':')
+	smooth = params['params.metric.smooth']
+	if not isinstance(smooth, list):
+		smooth = [smooth]
 	if len(smooth) == 1:
 		smooth.append(smooth[0])
-	
 	params['smooth1'] = smooth[0]
 	params['smooth2'] = smooth[1]
 
