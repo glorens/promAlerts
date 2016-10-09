@@ -1,0 +1,45 @@
+alerts:
+    ExDrop:
+        name: 
+            _one: exampleDrop1
+            _other: exampleDrop2
+            _3: exampleDrop3
+        condition: 
+            func: drop
+            params: 
+                drop as: 
+                    _d: 30%
+                    _3: 50%
+                offset as: 30m
+                from: 8
+                to: 22
+                metric:
+                    name as metric: name_metric
+                    filters:
+                        filter1 as f1: 
+                            _one: f1_one
+                            _other: f1_other
+                            _3: f1_three
+                        filter2 as: thisisasfilter
+                    smooth: 30m
+        for: 5m
+        labels:
+            team: demo
+        summary: "#name firing"
+        description: "#metric fall about #drop in #offset"
+    ExThresholdIncrease:
+        name: test
+        condition: 
+            func: thresholdIncrease
+            params: 
+                comp: <
+                threshold: 25
+                metric:
+                    name: ametric
+                    filters:
+                        filter1: filter1 
+                        filter2: filter2
+                    smooth: 30m
+        for: 5m
+        summary: "firing"
+        description: ""

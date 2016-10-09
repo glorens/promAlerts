@@ -1,0 +1,11 @@
+drop:
+    # raw: "increase(#metric{provider='#provider'}[#smooth]) < #rate * increase(#metric{provider='#provider'}[#smooth] offset #offset) * (time() % 86400 >bool #from*3600) * (time() % 86400 <bool #to*3600)"
+    # rawFile: drop:getRaw
+    # preTreat: drop:preTreat
+    treat: drop
+
+thresholdIncrease:
+    raw: "increase(#params.metric.name{#filters}[#params.metric.smooth]) #params.comp #params.threshold"
+    # rawFile: drop:getRaw
+    preTreat: thresholdIncrease
+    # treat: thresholdIncrease:treat
