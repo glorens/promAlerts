@@ -21,7 +21,9 @@ alerts:
                             _other: f1_other
                             _3: f1_three
                         filter2 as: thisisasfilter
-                    smooth: 30m
+                    smooth: 
+                        1: 10m
+                        2: 30m
         for: 5m
         labels:
             team: demo

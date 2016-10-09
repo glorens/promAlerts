@@ -26,6 +26,6 @@ if not _output or not _input:
 	sys.exit(0)
 
 
-render = generate('alerts.yml', 'output', alert)
+render = generate(_input, _output, alert)
 if verbose:
 	print render
