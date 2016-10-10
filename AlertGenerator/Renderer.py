@@ -28,7 +28,7 @@ class Renderer:
 
 		func = data['func']
 		raw = self.functions.renderFunc(func, data)
-		out = "#name\n"
+		out = "ALERT #name\n"
 		out += "	IF "+raw+"\n"
 		out += "	FOR #for\n"
 
@@ -47,7 +47,7 @@ class Renderer:
 		# out += "	LABELS #for\n"
 		out += "	ANNOTATIONS {\n"
 		out += "		summary='#summary'\n"
-		out += "		desciption='#description'\n"
+		out += "		description='#description'\n"
 		out += "	}\n"
 
 		out = self.replaceVars(out, data)
