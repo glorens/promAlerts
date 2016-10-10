@@ -40,14 +40,14 @@ class Renderer:
 			out += "	LABELS {"
 			labs = ""
 			for label, value in labels.iteritems():
-				labs += label+' = "'+value+'",'
+				labs += label+'="'+value+'",'
 			out += labs[:-1]
 			out += '}\n'
 
 		# out += "	LABELS #for\n"
 		out += "	ANNOTATIONS {\n"
-		out += "		summary='#summary'\n"
-		out += "		description='#description'\n"
+		out += '		summary="#summary"\n'
+		out += '		description="#description"\n'
 		out += "	}\n"
 
 		out = self.replaceVars(out, data)

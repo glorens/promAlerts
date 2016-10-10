@@ -8,7 +8,7 @@ def treat(params):
 	
 	metric = "#params.metric.name{"
 	for param in filters:
-		metric+=param[22:]+"='#"+param+"',"
+		metric+=param[22:]+'="#'+param+'",'
 	if len(filters) > 0:
 		metric = metric[:-1]
 	metric+="}"
@@ -24,9 +24,9 @@ def treat(params):
 
 	res = "increase("+metric+"[#smooth1]) < (#rate*increase("+metric+"[#smooth2] offset #params.offset)"
 	if 'params.from' in params and params['params.from'] != 'None':
-		res += " * (time() % 86400 >bool #params.from*3600)"
+		res += " * (time() % 86400 > bool #params.from*3600)"
 	if 'params.to' in params and params['params.from'] != 'None':
-		res += " * (time() % 86400 <bool #params.to*3600)"
+		res += " * (time() % 86400 < bool #params.to*3600)"
 	res += " )"
 	return res
 
