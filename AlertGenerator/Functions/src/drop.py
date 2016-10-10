@@ -22,12 +22,12 @@ def treat(params):
 	params['smooth2'] = smooth[1]
 
 
-	res = "increase("+metric+"[#smooth1]) < #rate * increase("+metric+"[#smooth2] offset #params.offset)"
+	res = "increase("+metric+"[#smooth1]) < (#rate*increase("+metric+"[#smooth2] offset #params.offset)"
 	if 'params.from' in params and params['params.from'] != 'None':
 		res += " * (time() % 86400 >bool #params.from*3600)"
 	if 'params.to' in params and params['params.from'] != 'None':
 		res += " * (time() % 86400 <bool #params.to*3600)"
-
+	res += " )"
 	return res
 
 def preTreat(params):
