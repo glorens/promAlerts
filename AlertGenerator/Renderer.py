@@ -29,15 +29,15 @@ class Renderer:
 		func = data['func']
 		raw = self.functions.renderFunc(func, data)
 		out = "ALERT #name\n"
-		out += "	IF "+raw+"\n"
-		out += "	FOR #for\n"
+		out += "    IF "+raw+"\n"
+		out += "    FOR #for\n"
 
 		labels = {}
 		for param , value in data.iteritems():
 			if 'labels.' in param:
 				labels[param[7:]] = value
 		if len(labels) > 0:
-			out += "	LABELS {"
+			out += "    LABELS {"
 			labs = ""
 			for label, value in labels.iteritems():
 				labs += label+'="'+value+'",'
@@ -45,10 +45,10 @@ class Renderer:
 			out += '}\n'
 
 		# out += "	LABELS #for\n"
-		out += "	ANNOTATIONS {\n"
-		out += '		summary="#summary"\n'
-		out += '		description="#description"\n'
-		out += "	}\n"
+		out += "    ANNOTATIONS {\n"
+		out += '        summary="#summary",\n'
+		out += '        description="#description"\n'
+		out += "    }\n"
 
 		out = self.replaceVars(out, data)
 
