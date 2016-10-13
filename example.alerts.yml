@@ -45,3 +45,9 @@ alerts:
         for: 5m
         summary: "firing"
         description: ""
+    GlobalDrop:
+        name: GlobalDrop
+        condition: 
+            func: globalDrop
+            params: 
+                source: ExDrop

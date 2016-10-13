@@ -25,7 +25,7 @@ class Renderer:
 		return stri 
 
 	def renderAlert(self, data, globalData = None):
-
+		
 		func = data['func']
 		raw = self.functions.renderFunc(func, data, globalData)
 		out = "ALERT #name\n"

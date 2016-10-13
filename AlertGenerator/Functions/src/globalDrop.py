@@ -8,49 +8,35 @@ def treat(params, globalParams):
 
 	source = globalParams[params['params.source']]
 
-	res = ""
+	res = "("
+
+	count = 0
 	for key, content in source.iteritems():
+		count += 1
+		content['rate'] = (100.0 - float(content['params.drop'].replace('%','')))/100
 		filters = []
-		for param , value in params.iteritems():
+		for param , value in content.iteritems():
 			if 'params.metric.filters.' in param:
-				filters.append(param)
+				filters.append([param,value])
+
 		metric = content["params.metric.name"]+"{"
-		for param in filters:
-			metric+=param[22:]+'="#'+param+'",'
+		for filt in filters:
+			metric+=filt[0][22:]+'="'+filt[1]+'",'
 		if len(filters) > 0:
 			metric = metric[:-1]
 		metric+="}"
+		
+		smooth = content['params.metric.smooth']
+		if not isinstance(smooth, list):
+			smooth = [smooth]
+		if len(smooth) == 1:
+			smooth.append(smooth[0])
 
-	return "lol"
-	# params['rate'] = (100.0 - float(params['params.drop'].replace('%','')))/100
-	# filters = []
-	# for param , value in params.iteritems():
-	# 	if 'params.metric.filters.' in param:
-	# 		filters.append(param)
+		res += " (increase(%s[%s])/(increase(%s[%s] offset %s) - %s) + " % (metric, smooth[0], metric, smooth[1], content['params.offset'], str(content['rate']))  
 	
-	# metric = "#params.metric.name{"
-	# for param in filters:
-	# 	metric+=param[22:]+'="#'+param+'",'
-	# if len(filters) > 0:
-	# 	metric = metric[:-1]
-	# metric+="}"
+	res = res[:-3] + ")/"+str(count)
 
-	# smooth = params['params.metric.smooth']
-	# if not isinstance(smooth, list):
-	# 	smooth = [smooth]
-	# if len(smooth) == 1:
-	# 	smooth.append(smooth[0])
-	# params['smooth1'] = smooth[0]
-	# params['smooth2'] = smooth[1]
-
-
-	# res = "increase("+metric+"[#smooth1]) < (#rate*increase("+metric+"[#smooth2] offset #params.offset)"
-	# if 'params.from' in params and params['params.from'] != 'None':
-	# 	res += " * (time() % 86400 > bool #params.from*3600)"
-	# if 'params.to' in params and params['params.from'] != 'None':
-	# 	res += " * (time() % 86400 < bool #params.to*3600)"
-	# res += " )"
-	# return res
+	return res
 
 def preTreat(params,globalParams):
 	return params
