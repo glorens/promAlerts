@@ -24,10 +24,10 @@ class Renderer:
 
 		return stri 
 
-	def renderAlert(self, data):
+	def renderAlert(self, data, globalData = None):
 
 		func = data['func']
-		raw = self.functions.renderFunc(func, data)
+		raw = self.functions.renderFunc(func, data, globalData)
 		out = "ALERT #name\n"
 		out += "    IF "+raw+"\n"
 		out += "    FOR #for\n"

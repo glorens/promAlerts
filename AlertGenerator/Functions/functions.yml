@@ -4,6 +4,9 @@ drop:
     # preTreat: drop:preTreat
     treat: drop
 
+globalDrop:
+    treat: globalDrop
+
 thresholdIncrease:
     raw: "increase(#params.metric.name{#filters}[#params.metric.smooth]) #params.comp #params.threshold"
     # rawFile: drop:getRaw
