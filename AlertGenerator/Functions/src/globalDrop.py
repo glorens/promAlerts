@@ -32,7 +32,7 @@ def treat(params, globalParams):
 		if len(smooth) == 1:
 			smooth.append(smooth[0])
 
-		res += " (increase(%s[%s])/(increase(%s[%s] offset %s) - %s) + " % (metric, smooth[0], metric, smooth[1], content['params.offset'], str(content['rate']))  
+		res += " ( clamp_max(increase(%s[%s])/increase(%s[%s] offset %s)/%s - 1,1/%s-1) ) + " % (metric, smooth[0], metric, smooth[1], content['params.offset'], str(content['rate']), str(content['rate']))  
 	
 	res = res[:-3] + ")/"+str(count)
 
