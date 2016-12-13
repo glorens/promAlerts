@@ -4,11 +4,9 @@ drop:
     # preTreat: drop:preTreat
     treat: drop
 
+pay_zero:
+    raw: "increase(#metric{action='#action',provider='#provider'}[#smooth]) = 0"
+
 globalDrop:
     treat: globalDrop
 
-thresholdIncrease:
-    raw: "increase(#params.metric.name{#filters}[#params.metric.smooth]) #params.comp #params.threshold"
-    # rawFile: drop:getRaw
-    preTreat: thresholdIncrease
-    # treat: thresholdIncrease:treat
