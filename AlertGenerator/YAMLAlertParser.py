@@ -86,6 +86,7 @@ class YAMLAlertParser:
 		
 		for key, data in params.iteritems():
 			params[key] = self.transformKeys(data) 
+		
 		return params
 
 	def generateRules(self, filepath):

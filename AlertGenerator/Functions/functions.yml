@@ -1,12 +1,6 @@
 drop:
-    # raw: "increase(#metric{provider='#provider'}[#smooth]) < #rate * increase(#metric{provider='#provider'}[#smooth] offset #offset) * (time() % 86400 >bool #from*3600) * (time() % 86400 <bool #to*3600)"
-    # rawFile: drop:getRaw
-    # preTreat: drop:preTreat
+    preTreat: metric
     treat: drop
-
-pay_zero:
-    raw: "increase(#metric{action='#action',provider='#provider'}[#smooth]) = 0"
-
-globalDrop:
-    treat: globalDrop
-
+time_zero:
+    preTreat: swapzero,metric
+    raw: '((time() % 86400 < bool #params.from*3600) + (time() % 86400 > bool #params.to*3600) + changes(#precompute.metric[#params.metric.duration])) == 0'

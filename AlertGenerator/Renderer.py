@@ -28,6 +28,7 @@ class Renderer:
 		
 		func = data['func']
 		raw = self.functions.renderFunc(func, data, globalData)
+
 		out = "ALERT #name\n"
 		out += "    IF "+raw+"\n"
 		out += "    FOR #for\n"
@@ -44,7 +45,6 @@ class Renderer:
 			out += labs[:-1]
 			out += '}\n'
 
-		# out += "	LABELS #for\n"
 		out += "    ANNOTATIONS {\n"
 		out += '        summary="#summary",\n'
 		out += '        description="#description"\n'

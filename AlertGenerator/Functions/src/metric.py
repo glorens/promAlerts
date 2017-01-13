@@ -5,10 +5,11 @@ def preTreat(params):
 		if 'params.metric.filters.' in param:
 			filters.append(param)
 	
-	metric = ""
+	metric = "#params.metric.name{"
 	for param in filters:
-		metric+=param[22:]+"='#"+param+"',"
+		metric+=param[22:]+'="#'+param+'",'
 	if len(filters) > 0:
 		metric = metric[:-1]
-	
-	params['filters'] = metric
+	metric+="}"
+
+	params['precompute.metric'] = metric
